@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Small Moment</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: #f8f6f2;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    padding: 20px; /* prevents edge touching on mobile */
+}
+
+.container {
+    position: absolute;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(30px);
+    visibility: hidden;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.container.active {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+/* Responsive text sizes */
+.container h1 {
+    font-size: 2.5rem;
+}
+
+.container p {
+    font-size: 1.2rem;
+}
+
+/* Text animation */
+.container h1,
+.container p {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.container.active h1 {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+}
+
+.container.active p:nth-of-type(1) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.8s;
+}
+
+.container.active p:nth-of-type(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.2s;
+}
+
+.container.active p:nth-of-type(3) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.6s;
+}
+
+button {
+    margin-top: 30px;
+    padding: 12px 25px;
+    border: 1px solid #333;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.container.active button {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 2s;
+}
+
+button:hover {
+    background: #333;
+    color: white;
+}
+
+/* Responsive video (16:9 ratio) */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    margin-top: 20px;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Smaller screens adjustments */
+@media (max-width: 480px) {
+    .container h1 {
+        font-size: 2rem;
+    }
+
+    .container p {
+        font-size: 1rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container active" id="page1">
+    <h1>This is just a moment.</h1>
+    <p>Not to change anything. Not to ask for anything.</p>
+    <button onclick="nextPage('page1','page2')">Continue</button>
+</div>
+
+<div class="container" id="page2">
+    <p>In a world where most things pass quickly...</p>
+    <p>Some moments deserve to be kept.</p>
+    <button onclick="nextPage('page2','page3')">One More Thing</button>
+</div>
+
+<div class="container" id="page3">
+    <p>Because some thoughts stay longer than they should.</p>
+    <p>Some names echo quietly in the background.</p>
+    <p>And some feelings deserve clarity.</p>
+    <button onclick="nextPage('page3','videoPage')">If You're Ready</button>
+</div>
+
+<div class="container" id="videoPage">
+    <p>So instead of writing it all...</p>
+    <p>I'll say it.</p>
+    <div class="video-wrapper">
+        <iframe 
+            src="https://www.youtube.com/embed/pGL_LYvtsx4"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+<script>
+function nextPage(current, next) {
+    const currentPage = document.getElementById(current);
+    const nextPage = document.getElementById(next);
+
+    currentPage.classList.remove("active");
+
+    setTimeout(() => {
+        nextPage.classList.add("active");
+    }, 600);
+}
+</script>
+
+</body>
+</html>
